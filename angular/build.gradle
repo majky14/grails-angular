@@ -1,0 +1,31 @@
+plugins {
+    id "com.github.node-gradle.node" version "2.2.1"
+}
+
+node {
+    version = '10.13.0'
+    npmVersion = '6.13.7'
+    download = true
+}
+
+task bootRun(type: NpmTask, dependsOn: 'npmInstall') {
+    group = 'application'
+    description = 'Start client side'
+    args = ['run', 'start']
+}
+
+task build(type: NpmTask, dependsOn: 'npmInstall') {
+    group = 'build'
+    description = 'Build client side'
+    args = ['run', 'build']
+}
+
+task test(type: NpmTask, dependsOn: 'npmInstall') {
+    group = 'verification'
+    description = 'Execute unit tests'
+    args = ['run', 'test']
+}
+
+task integrationTest(type: NpmTask, dependsOn: 'npmInstall') {
+    args = ['run', 'e2e']
+}
